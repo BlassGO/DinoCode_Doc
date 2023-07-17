@@ -753,6 +753,7 @@ Message "T i t l e" With "Huh!"
 >    Gui "custom3: Destroy"
 >    Gui "custom3: Add, Button, gOKAY, PRESS ME"
 >    Gui "custom3: Show, w200 h100, My window"
+>    Wait_window "My window"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui_en.jpg"></p>
@@ -767,6 +768,7 @@ Message "T i t l e" With "Huh!"
 >    Gui "MyGUI: Add, Edit, vCONTENT"
 >    Gui "MyGUI: Add, Button, gRECEIVE, SUBMIT"
 >    Gui "MyGUI: Show, w200 h100, My window"
+>    Wait_window "My window"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui2_en.jpg"></p>

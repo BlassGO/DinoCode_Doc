@@ -753,6 +753,7 @@ Mensaje "T í t u l o" Con "Huh!"
 >    Gui "custom3: Destroy"
 >    Gui "custom3: Add, Button, gOKAY, PRESIONAME"
 >    Gui "custom3: Show, w200 h100, Mi Ventana"
+>    Esperar_ventana "Mi Ventana"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui.jpg"></p>
@@ -767,6 +768,7 @@ Mensaje "T í t u l o" Con "Huh!"
 >    Gui "MyGUI: Add, Edit, vCONTENIDO"
 >    Gui "MyGUI: Add, Button, gRECIBIR, ENVIAR"
 >    Gui "MyGUI: Show, w200 h100, Mi Ventana"
+>    Esperar_ventana "Mi Ventana"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui2.jpg"></p>
