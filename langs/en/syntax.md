@@ -681,6 +681,37 @@ Message "T i t l e" With "Huh!"
     > ```
     > **WARNING**: There is a difference between using a Lowercase and an Uppercase alphabetic escaped character. On Linux distros, the `\n` character known as "linefeed" is often used to represent a newline, however, on Windows operating systems, a combination of "carriage return"-->`\r`, next to "linefeed"-->`\n` is more appreciated. For convenience in DinoCode the use of `\n` does NOT actually represent a "linefeed", but the combination `\r\n`. To use a real linefeed, it can be persisted by changing the character to Upper Case, ie `\N`.
 
+## Threads
+> It allows executing `TAG` Sections asynchronously, that is, the section will use a separate execution space.
+> 
+> **->** The `THREADS` are considered extensions of the block, that is, the data is shared (NOT LOCAL).
+> ```javascript
+> Thread TAG TIME
+> ```
+
+> In this example, the `ALERT` section starts as a secondary `THREAD` that will be called every `1000` milliseconds (1s), and by not stopping the flow of the Script, it gives way to the Message of the main THREAD (`MAIN`) , then, after a second, a second message will be displayed that corresponds to the new THREAD created, and said THREAD is deleted (Avoiding continuing with the call every 1000 milliseconds).
+> ```javascript
+> :ALERT
+>   Msg "Second" With "Secondary THREAD message"
+>   Thread ALERT Delete
+> :MAIN
+>   Thread ALERT 1000
+>   Msg "First" With "Main THREAD message"
+> ```
+>
+> This is a much more practical example of using THREADS, the `INCREASE` section acts as a counter that will increment every `100` milliseconds and destroy the secondary THREAD only when 100 units are reached.
+> ```javascript
+> :INCREASE
+>   COUNT++
+>   Print COUNT
+>   IF (COUNT >= 100)
+>      Thread INCREASE Delete
+>      Msg "Thread 2" With "The counter will NO longer increment."
+> :MAIN
+>   Set COUNT With 0
+>   Thread INCREASE 100
+>   Msg "Thread 1" With "This message does not prevent the counter from being incremented."
+> ```
 
 ## Evaluator
 > Allows you to `evaluate` strings as percentage expressions `% %`.

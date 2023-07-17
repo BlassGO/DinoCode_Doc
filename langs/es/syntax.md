@@ -681,6 +681,37 @@ Mensaje "T í t u l o" Con "Huh!"
     > ```
     > **ADVERTENCIA**: Existe una diferencia entre usar un carácter escapado alfabético en Minúsculas y uno en Mayúsculas. En distros Linux se suele usar el carácter `\n` conocido como "linefeed" para representar un salto de línea, sin embargo, en sistemas operativos Windows, se prefiere una combinación de "retorno de carro"-->`\r`, junto a "linefeed"-->`\n`. Por comodidad en DinoCode el uso de `\n` NO representa realmente un "linefeed", sino la combinación `\r\n`. Para usar un "linefeed" real, se puede persistir cambiando el carácter a Mayúscula, es decir, `\N`.
 
+## Hilos
+> Permite ejecutar Secciones `TAG` asincronicamente, es decir, la sección usará un espacio de ejecución independiente.
+> 
+> **->** Los `HILOS` se consideran extensiones del bloque, es decir, los datos son compartidos (NO LOCAL).
+> ```javascript
+> Hilo TAG TIEMPO
+> ```
+
+> En este ejemplo, la sección `ALERTA` se inicia como un `HILO` secundario que será llamado cada `1000` milisegundos (1s), y al no detener el flujo del Script, da paso al Mensaje del HILO principal (`MAIN`), después, al segundo, se mostrará un segundo mensaje que corresponde al nuevo HILO creado, y se elimina dicho HILO (Evitando seguir con el llamado cada 1000 milisegundos).
+> ```javascript
+> :ALERTA
+>   Msg "Segundo" con "Mensaje del HILO secundario"
+>   Hilo ALERTA Delete
+> :MAIN
+>   Hilo ALERTA 1000
+>   Msg "Primero" con "Mensaje del HILO principal"
+> ```
+>
+> Este es un ejemplo mucho más práctico del uso de HILOS, la sección `INCREMENTAR` actúa como un contador que incrementará cada `100` milisegundos y destruirá el HILO secundario únicamente cuando se alcancen 100 unidades.
+> ```javascript
+> :INCREMENTAR
+>   CONTADOR++
+>   Imprimir CONTADOR
+>   Si (CONTADOR >= 100)
+>      Hilo INCREMENTAR Delete
+>      Msg "Hilo 2" con "El contador ya NO incrementará."
+> :MAIN
+>   Definir CONTADOR con 0
+>   Hilo INCREMENTAR 100
+>   Msg "Hilo 1" con "Este mensaje no impide el incremento del contador."
+> ```
 
 ## Evaluador
 > Permite `evaluar` cadenas de texto como expresiones porcentuales `% %`.
