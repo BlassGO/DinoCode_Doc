@@ -685,9 +685,13 @@ Mensaje "T í t u l o" Con "Huh!"
 > Permite ejecutar Secciones `TAG` asincronicamente, es decir, la sección usará un espacio de ejecución independiente.
 > 
 > **->** Los `HILOS` se consideran extensiones del bloque, es decir, los datos son compartidos (NO LOCAL).
-> ```javascript
-> Hilo TAG TIEMPO
-> ```
+> 
+| **OPCIONES** | **EXPLICACIÓN** |
+|:---:|:---:|
+| Hilo TAG **TIEMPO** | - Crea un HILO nuevo y establece un temporizador (milisegundos) que se reiniciará constantemente.<br>- Si el TIEMPO es negativo, el temporizador solo funcionará una vez y suspenderá el HILO (sin eliminarlo). |
+| Hilo TAG **Off** | - Suspende el temporizador del HILO. |
+| Hilo TAG **On** | - Activa el temporizador si fue suspendido. |
+| Hilo TAG **Delete** | - Elimina completamente el HILO. |                                                                                                                                                                           |
 
 > En este ejemplo, la sección `ALERTA` se inicia como un `HILO` secundario que será llamado cada `1000` milisegundos (1s), y al no detener el flujo del Script, da paso al Mensaje del HILO principal (`MAIN`), después, al segundo, se mostrará un segundo mensaje que corresponde al nuevo HILO creado, y se elimina dicho HILO (Evitando seguir con el llamado cada 1000 milisegundos).
 > ```javascript

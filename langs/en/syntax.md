@@ -685,9 +685,13 @@ Message "T i t l e" With "Huh!"
 > It allows executing `TAG` Sections asynchronously, that is, the section will use a separate execution space.
 > 
 > **->** The `THREADS` are considered extensions of the block, that is, the data is shared (NOT LOCAL).
-> ```javascript
-> Thread TAG TIME
-> ```
+>
+| **OPTIONS** | **EXPLANATION** |
+|:---:|:---:|
+| Thread TAG **TIME** | - Create a new THREAD and set a timer (milliseconds) that will constantly restart.<br>- If TIME is negative, the timer will only run once and suspend the THREAD (not kill it). |
+| Thread TAG **Off** | - Suspend the THREAD timer. |
+| Thread TAG **On** | - Activate the timer if it was suspended. |
+| Thread TAG **Delete** | - Completely delete the THREAD. |                                                                                                                                                                           |
 
 > In this example, the `ALERT` section starts as a secondary `THREAD` that will be called every `1000` milliseconds (1s), and by not stopping the flow of the Script, it gives way to the Message of the main THREAD (`MAIN`) , then, after a second, a second message will be displayed that corresponds to the new THREAD created, and said THREAD is deleted (Avoiding continuing with the call every 1000 milliseconds).
 > ```javascript
