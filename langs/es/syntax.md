@@ -435,6 +435,71 @@ Las expresiones evaluadas o de llamado `$( )` se usan para llamar cualquier Func
 > ```
 
 
+## Bucle - Para
+> A diferencia de los bucles mencionados en [BUCLES](#bucles), el bucle `Para` no utiliza una condición, en su lugar, funciona bajo el concepto de `elementos`, en donde cada iteración permitira manejar un `DATO` correspondiente a cada elemento existente dentro del conjunto.
+>
+> **->** Se utiliza una Variable Temporal que se limpia al finalizar el bucle.
+> 
+> ```javascript
+> Para VARIABLE En <elementos>
+>    línea del bucle
+>    línea del bucle
+> línea fuera del bucle
+> ```
+
+> En este ejemplo, se define un bucle para la variable `X`, en donde `X` tomará UN SOLO elemento del conjunto `1 2 3 4` en cada iteración, es decir, el bucle terminará cuando ya no existan más elementos por tomar. Como en este ejemplo existen 4 elementos, se harán 4 iteraciones.
+>
+> ```javascript
+> :MAIN
+>    Para X En 1 2 3 4
+>       Imprimir X
+>    Imprimir "Fuera del bucle"
+> ```
+> 
+> Ejemplo con cadenas. 3 elementos = 3 iteraciones.
+>
+> ```javascript
+> :MAIN
+>    Para LINEA En "Primera linea" "Segunda linea" "Tercera linea"
+>       Imprimir LINEA
+>    Imprimir "Fuera del bucle"
+> ```
+> También es posible usar [EXPRESIONES](#expresiones).
+>
+> ```javascript
+> :MAIN
+>    Para RESULTADO En % 5 + 5 %     % 5 * 5 %      % 3/4 %
+>       Imprimir RESULTADO
+>
+>    Para DATO En $(Entrada "Cual es tu nombre?")  $(Entrada "Cual es tu apellido?")  $(Entrada "Cual es tu edad?")
+>       Imprimir DATO
+> ```
+
+* **Puntero de expansión**
+   > Indica que un Arreglo debe expandirse en todos sus elementos, en lugar de tomar todo el Arreglo como tal.
+   >
+   > **->** Se coloca un `*` al final del nombre del Arreglo: `Arreglo*`
+   >
+   
+   > Esta es la forma más práctica de recorrer los elementos de un Arreglo combinando un bucle `Para` con el puntero de expansión. Esto funciona porque la expansión del arreglo produce una referencia a cada uno de sus elementos, brindando una iteración para cada uno.
+   > ```javascript
+   > :MAIN
+   >    Definir LISTA con "A" "B" "C"
+   >    Para ELEMENTO En LISTA*
+   >       Imprimir ELEMENTO
+   >
+   > ```
+   > La expansión de un Arreglo puede usarse en cualquier parte de la secuencia. En este ejemplo se mezclan los elementos predefinidos con los elementos de dos arreglos, manteniendo un orden lógico.
+   > ```javascript
+   > :MAIN
+   >    Definir LETRAS con "A" "B" "C"
+   >    Definir NUMEROS con 4 5 6
+   >    Para ELEMENTO En 1 2 3 NUMEROS* "---------" LETRAS*
+   >       Imprimir ELEMENTO
+   >
+   > ```
+
+
 
 ## Funciones
 > Las Secciones `TAG` de DinoCode pueden trabajar de dos modos:

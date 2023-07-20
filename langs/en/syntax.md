@@ -435,6 +435,71 @@ Evaluated or calling expressions `$( )` are used to call any existing Function, 
 > ```
 
 
+## Loop - For
+> Unlike the loops mentioned in [LOOPS](#loops), the `For` loop does not use a condition, instead, it works under the concept of `elements`, where each iteration will allow handling a `DATA` corresponding to each existing element within the set.
+>
+> **->** A Temporary Variable is used that is cleared at the end of the loop.
+> 
+> ```javascript
+> For VARIABLE In <elements>
+>    loop line
+>    loop line
+> line out of loop
+> ```
+
+> In this example, a loop is defined for the variable `X`, where `X` will take ONLY ONE element from the set `1 2 3 4` in each iteration, that is, the loop will end when there are no more elements to take. As in this example there are 4 elements, there will be 4 iterations.
+>
+> ```javascript
+> :MAIN
+>    For X In 1 2 3 4
+>       Print X
+>    Print "out of the loop"
+> ```
+> 
+> Example with strings. 3 elements = 3 iterations.
+>
+> ```javascript
+> :MAIN
+>    For LINE In "First line" "Second line" "Third line"
+>       Print LINE
+>    Print "out of the loop"
+> ```
+> It is also possible to use [EXPRESSIONS](#expressions).
+>
+> ```javascript
+> :MAIN
+>    For RESULT In % 5 + 5 %     % 5 * 5 %      % 3/4 %
+>       Print RESULT
+>
+>    For DATA In $(Input "What is your name?")  $(Input "What is your last name?")  $(Input "How old are you?")
+>       Print DATA
+> ```
+
+* **Expansion pointer**
+   > Indicates that an Array should be expanded into all of its elements, rather than taking the entire Array as such.
+   >
+   > **->** A `*` is placed at the end of the Array name: `Array*`
+   >
+   
+   > This is the most convenient way to loop through the elements of an Array by combining a `For` loop with the expand pointer. This works because the expansion of the array produces a reference to each of its elements, providing one iteration for each.
+   > ```javascript
+   > :MAIN
+   >    Set LIST With "A" "B" "C"
+   >    For ELEMENT In LIST*
+   >       Print ELEMENT
+   >
+   > ```
+   > An Array expansion can be used anywhere in the sequence. This example mixes the predefined elements with the elements of two arrays, maintaining a logical order.
+   > ```javascript
+   > :MAIN
+   >    Set LETTERS With "A" "B" "C"
+   >    Set NUMBERS With 4 5 6
+   >    For ELEMENT In 1 2 3 NUMBERS* "---------" LETTERS*
+   >       Print ELEMENT
+   >
+   > ```
+
+
 
 ## Functions
 > DinoCode `TAG` Sections can work in two ways:
