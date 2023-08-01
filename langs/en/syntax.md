@@ -134,8 +134,6 @@
 <!-- tab:%Expression% -->
 The Percentage Expressions `% %` are used to give `numbers`, `strings` or `variables` additional processing and get their result.
 
-**->** Additionally, they are the only ones that can access external Variables defined within the main program.
-
 ### Variables
 > By default, no additional Expression is required to refer to a Variable:
 > ```javascript

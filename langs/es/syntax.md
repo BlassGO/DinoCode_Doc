@@ -134,8 +134,6 @@
 <!-- tab:%Expresión% -->
 Las expresiones porcentuales `% %` se usan para dar un procesamiento adicional a `números`, `cadenas de texto` o `variables` y obtener su resultado.
 
-**->** Adicionalmente, son las únicas que pueden acceder a Variables externas definidas dentro del programa principal.
-
 ### Variables
 > Por defecto, para hacer referencia a una Variable no se requiere de ninguna Expresión adicional:
 > ```javascript
