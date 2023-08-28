@@ -1,6 +1,6 @@
 ## Dinocode
 
-   > <span style="color: #15FD0F; font-weight: bold;">DinoCode</span> is a fourth generation pseudo-language based on <span style="color: #AEB7AE; font-weight: bold;">AutoHotKey v1.1.33.11</span>, focused on processing additional information outside of compile time, with extended support for native AHK functions and additional developer-defined functions, driving its own simple, flexible, controlled, multilanguage programming logic ( `Español\Inglés`).
+   > <span style="color: #15FD0F; font-weight: bold;">DinoCode</span> is a fourth generation pseudo-language based on <span style="color: #AEB7AE; font-weight: bold;">AutoHotKey v1.1.37.01</span>, focused on processing additional information outside of compile time, with extended support for native AHK functions and additional developer-defined functions, driving its own simple, flexible, controlled, multilanguage programming logic ( `Español\Inglés`).
 
    ### History
    > It was developed by BlassGO (Ismael Q.) to allow full control of the AutoIMG tool for Windows, being able to control through a SCRIPT important aspects of Android software installation, such as formatting/updating partitions, executing shell commands, flashing custom modules and further. All with the same predefined functions in the tool and with the ability to create new functions.
@@ -52,7 +52,7 @@
    Dinocode is not optimized for great tasks, mainly because of its mode of interpretation and overload of having double interpreter.
 
 ## Implementation
-   > To add DinoCode to your `AutoHotKey` (v1.1.33.11) based program, three libraries must be included:
+   > To add DinoCode to your `AutoHotKey` (v1.1.37.01) based program, three libraries must be included:
    > 
    > **->**  [Download libraries](https://github.com/BlassGO/DinoCode/raw/main/releases/DinoCode_last_release.zip ':ignore')
    > 

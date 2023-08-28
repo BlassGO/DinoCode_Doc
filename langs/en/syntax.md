@@ -434,44 +434,104 @@ Evaluated or calling expressions `$( )` are used to call any existing Function, 
 
 
 ## Loop - For
-> Unlike the loops mentioned in [LOOPS](#loops), the `For` loop does not use a condition, instead, it works under the concept of `elements`, where each iteration will allow handling a `DATA` corresponding to each existing element within the set.
->
-> **->** A Temporary Variable is used that is cleared at the end of the loop.
-> 
-> ```javascript
-> For VARIABLE In <elements>
->    loop line
->    loop line
-> line out of loop
-> ```
+> Unlike the loops mentioned in [LOOPS](#loops), the `For` loop does not use a condition, instead it works on the concept of `elements` or `number sequences`, as follows:
 
-> In this example, a loop is defined for the variable `X`, where `X` will take ONLY ONE element from the set `1 2 3 4` in each iteration, that is, the loop will end when there are no more elements to take. As in this example there are 4 elements, there will be 4 iterations.
->
-> ```javascript
-> :MAIN
->    For X In 1 2 3 4
->       Print X
->    Print "out of the loop"
-> ```
-> 
-> Example with strings. 3 elements = 3 iterations.
->
-> ```javascript
-> :MAIN
->    For LINE In "First line" "Second line" "Third line"
->       Print LINE
->    Print "out of the loop"
-> ```
-> It is also possible to use [EXPRESSIONS](#expressions).
->
-> ```javascript
-> :MAIN
->    For RESULT In % 5 + 5 %     % 5 * 5 %      % 3/4 %
->       Print RESULT
->
->    For DATA In $(Input "What is your name?")  $(Input "What is your last name?")  $(Input "How old are you?")
->       Print DATA
-> ```
+* **For-Sequence**
+   > Iterations occur based on a numeric sequence, which can be from (`1...N`) or from (`N...N2`), where `N` and `N2` can be any integer.
+   >
+   > **->** An `INDEX` Temporary Variable is used which is associated with the numeric value traversed.
+   > ```javascript
+   > For <N>
+   >    loop line
+   >    loop line
+   > line out of loop
+   > ```
+   >
+   > ```javascript
+   > For <N> <N2>
+   >    loop line
+   >    loop line
+   > line out of loop
+   > ```
+   
+   > In this example, `10` iterations will be done and the `INDEX` variable will take a value from (`1...N`).
+   > ```javascript
+   > For 10
+   >    Print INDEX
+   > ```
+   > In this example, `3` iterations will be done and the `INDEX` variable will take a value from (`7...10`).
+   > ```javascript
+   > For 7  10
+   >    Print INDEX
+   > ```
+   > In this example, `5` iterations will be done and the `INDEX` variable will take a value from (`-2...2`).
+   > ```javascript
+   > For -2  2
+   >    Print INDEX
+   > ```
+
+* **For-Elements**
+   > The iterations are produced based on the elements available in the sequence, where each iteration will allow handling a `DATA` corresponding to each element.
+   > 
+   > **->** Any Temporary Variable is used to store each `DATA`.
+   > 
+   > ```javascript
+   > For <VARIABLE> In <elements>
+   >    loop line
+   >    loop line
+   > line out of loop
+   > ```
+
+   > In this example, a loop is defined for the variable `X`, where `X` will take ONLY ONE element from the set `1 2 3 4` in each iteration, that is, the loop will end when there are no more elements to take. As in this example there are 4 elements, there will be 4 iterations.
+   >
+   > ```javascript
+   > :MAIN
+   >    For X In 1 2 3 4
+   >       Print X
+   >    Print "out of the loop"
+   > ```
+   > 
+   > Example with strings. 3 elements = 3 iterations.
+   >
+   > ```javascript
+   > :MAIN
+   >    For LINE In "First line" "Second line" "Third line"
+   >       Print LINE
+   >    Print "out of the loop"
+   > ```
+   > It is also possible to use [EXPRESSIONS](#expressions).
+   >
+   > ```javascript
+   > :MAIN
+   >    For RESULT In % 5 + 5 %     % 5 * 5 %      % 3/4 %
+   >       Print RESULT
+   >
+   >    For DATA In $(Input "What is your first name?") $(Input "What is your last name?") $(Input "What is your age?")
+   >       Print DATA
+   > ```
+
+* **For-Object**
+   > The iterations are produced based on the elements available in an `Object` or `Array`, where each iteration will allow handling the `KEY` and the respective `DATA` of each element.
+   > 
+   > **->** Any two Temporary Variables are used to store the `KEY` and the `DATA`.
+   > 
+   > ```javascript
+   > For <KEY> <DATA> In <OBJECT>
+   >    loop line
+   >    loop line
+   > out of the loop
+   > ```
+
+   > In this example, a loop is defined for the variables `KEY` and `DATA`, where `KEY` will take the identifier of a SINGLE element of `ARRAY` and `DATA` will take the value corresponding to that identifier on each iteration, that is, the loop will end when there are no more elements to take. Since in this example there are 4 elements in the array, 4 iterations will be made.
+   >
+   > ```javascript
+   > :MAIN
+   >    Set ARRAY With "A" "B" "C"
+   >    For KEY DATA In ARRAY
+   >       Print "%KEY% = %DATA%"
+   >    Print "out of the loop"
+   > ```
+   > 
 
 * **Expansion pointer**
    > Indicates that an Array should be expanded into all of its elements, rather than taking the entire Array as such.
@@ -479,7 +539,7 @@ Evaluated or calling expressions `$( )` are used to call any existing Function, 
    > **->** A `*` is placed at the end of the Array name: `Array*`
    >
    
-   > This is the most convenient way to loop through the elements of an Array by combining a `For` loop with the expand pointer. This works because the expansion of the array produces a reference to each of its elements, providing one iteration for each.
+   > This is another way to loop through the elements of an Array by combining a `For` loop with the expand pointer. This works because the expansion of the array produces a reference to each of its elements, providing one iteration for each.
    > ```javascript
    > :MAIN
    >    Set LIST With "A" "B" "C"

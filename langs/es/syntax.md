@@ -434,44 +434,104 @@ Las expresiones evaluadas o de llamado `$( )` se usan para llamar cualquier Func
 
 
 ## Bucle - Para
-> A diferencia de los bucles mencionados en [BUCLES](#bucles), el bucle `Para` no utiliza una condición, en su lugar, funciona bajo el concepto de `elementos`, en donde cada iteración permitira manejar un `DATO` correspondiente a cada elemento existente dentro del conjunto.
->
-> **->** Se utiliza una Variable Temporal que se limpia al finalizar el bucle.
-> 
-> ```javascript
-> Para VARIABLE En <elementos>
->    línea del bucle
->    línea del bucle
-> línea fuera del bucle
-> ```
+> A diferencia de los bucles mencionados en [BUCLES](#bucles), el bucle `Para` no utiliza una condición, en su lugar, funciona bajo el concepto de `elementos` o `secuencias numéricas`, como se detalla a continuación:
 
-> En este ejemplo, se define un bucle para la variable `X`, en donde `X` tomará UN SOLO elemento del conjunto `1 2 3 4` en cada iteración, es decir, el bucle terminará cuando ya no existan más elementos por tomar. Como en este ejemplo existen 4 elementos, se harán 4 iteraciones.
->
-> ```javascript
-> :MAIN
->    Para X En 1 2 3 4
->       Imprimir X
->    Imprimir "Fuera del bucle"
-> ```
-> 
-> Ejemplo con cadenas. 3 elementos = 3 iteraciones.
->
-> ```javascript
-> :MAIN
->    Para LINEA En "Primera linea" "Segunda linea" "Tercera linea"
->       Imprimir LINEA
->    Imprimir "Fuera del bucle"
-> ```
-> También es posible usar [EXPRESIONES](#expresiones).
->
-> ```javascript
-> :MAIN
->    Para RESULTADO En % 5 + 5 %     % 5 * 5 %      % 3/4 %
->       Imprimir RESULTADO
->
->    Para DATO En $(Entrada "Cual es tu nombre?")  $(Entrada "Cual es tu apellido?")  $(Entrada "Cual es tu edad?")
->       Imprimir DATO
-> ```
+* **Para-Secuencia**
+   > Las iteraciones se producen en base a una secuencia numérica, que puede ir desde (`1...N`) o desde (`N...N2`), en donde `N` y `N2` pueden ser cualquier número entero.
+   >
+   > **->** Se utiliza una Variable Temporal `INDEX` que se asocia con el valor numérico recorrido.
+   > ```javascript
+   > Para <N>
+   >    línea del bucle
+   >    línea del bucle
+   > línea fuera del bucle
+   > ```
+   >
+   > ```javascript
+   > Para <N> <N2>
+   >    línea del bucle
+   >    línea del bucle
+   > línea fuera del bucle
+   > ```
+   
+   > En este ejemplo, se harán `10` iteraciones y la variable `INDEX` tomará un valor desde (`1...N`).
+   > ```javascript
+   > Para 10
+   >    Imprimir INDEX
+   > ```
+   > En este ejemplo, se harán `3` iteraciones y la variable `INDEX` tomará un valor desde (`7...10`).
+   > ```javascript
+   > Para 7  10
+   >    Imprimir INDEX
+   > ```
+   > En este ejemplo, se harán `5` iteraciones y la variable `INDEX` tomará un valor desde (`-2...2`).
+   > ```javascript
+   > Para -2  2
+   >    Imprimir INDEX
+   > ```
+
+* **Para-Elementos**
+   > Las iteraciones se producen en base a los elementos disponibles en la secuencia, en donde cada iteración permitira manejar un `DATO` correspondiente a cada elemento.
+   > 
+   > **->** Se utiliza una Variable Temporal cualquiera para almacenar cada `DATO`.
+   > 
+   > ```javascript
+   > Para <VARIABLE> En <elementos>
+   >    línea del bucle
+   >    línea del bucle
+   > línea fuera del bucle
+   > ```
+
+   > En este ejemplo, se define un bucle para la variable `X`, en donde `X` tomará UN SOLO elemento del conjunto `1 2 3 4` en cada iteración, es decir, el bucle terminará cuando ya no existan más elementos por tomar. Como en este ejemplo existen 4 elementos, se harán 4 iteraciones.
+   >
+   > ```javascript
+   > :MAIN
+   >    Para X En 1 2 3 4
+   >       Imprimir X
+   >    Imprimir "Fuera del bucle"
+   > ```
+   > 
+   > Ejemplo con cadenas. 3 elementos = 3 iteraciones.
+   >
+   > ```javascript
+   > :MAIN
+   >    Para LINEA En "Primera linea" "Segunda linea" "Tercera linea"
+   >       Imprimir LINEA
+   >    Imprimir "Fuera del bucle"
+   > ```
+   > También es posible usar [EXPRESIONES](#expresiones).
+   >
+   > ```javascript
+   > :MAIN
+   >    Para RESULTADO En % 5 + 5 %     % 5 * 5 %      % 3/4 %
+   >       Imprimir RESULTADO
+   >
+   >    Para DATO En $(Entrada "Cual es tu nombre?")  $(Entrada "Cual es tu apellido?")  $(Entrada "Cual es tu edad?")
+   >       Imprimir DATO
+   > ```
+
+* **Para-Objeto**
+   > Las iteraciones se producen en base a los elementos disponibles en un `Objeto` o `Arreglo`, en donde cada iteración permitira manejar la `CLAVE` y el `DATO` respectivo de cada elemento.
+   > 
+   > **->** Se utilizan dos Variables Temporales cualquiera para almacenar la `CLAVE` y el `DATO`.
+   > 
+   > ```javascript
+   > Para <CLAVE> <DATO> En <OBJETO>
+   >    línea del bucle
+   >    línea del bucle
+   > línea fuera del bucle
+   > ```
+
+   > En este ejemplo, se define un bucle para las variables `CLAVE` y `DATO`, en donde `CLAVE` tomará el identificador de UN SOLO elemento de `ARREGLO` y `DATO` tomará el valor correspondiente a dicho identificador en cada iteración, es decir, el bucle terminará cuando ya no existan más elementos por tomar. Como en este ejemplo existen 4 elementos en el arreglo, se harán 4 iteraciones.
+   >
+   > ```javascript
+   > :MAIN
+   >    Definir ARREGLO con "A" "B" "C"
+   >    Para CLAVE DATO En ARREGLO
+   >       Imprimir "%CLAVE% = %DATO%"
+   >    Imprimir "Fuera del bucle"
+   > ```
+   > 
 
 * **Puntero de expansión**
    > Indica que un Arreglo debe expandirse en todos sus elementos, en lugar de tomar todo el Arreglo como tal.
@@ -479,7 +539,7 @@ Las expresiones evaluadas o de llamado `$( )` se usan para llamar cualquier Func
    > **->** Se coloca un `*` al final del nombre del Arreglo: `Arreglo*`
    >
    
-   > Esta es la forma más práctica de recorrer los elementos de un Arreglo combinando un bucle `Para` con el puntero de expansión. Esto funciona porque la expansión del arreglo produce una referencia a cada uno de sus elementos, brindando una iteración para cada uno.
+   > Esta es otra forma de recorrer los elementos de un Arreglo combinando un bucle `Para` con el puntero de expansión. Esto funciona porque la expansión del arreglo produce una referencia a cada uno de sus elementos, brindando una iteración para cada uno.
    > ```javascript
    > :MAIN
    >    Definir LISTA con "A" "B" "C"
