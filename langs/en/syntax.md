@@ -459,7 +459,7 @@ Evaluated or calling expressions `$( )` are used to call any existing Function, 
    > For 10
    >    Print INDEX
    > ```
-   > In this example, `3` iterations will be done and the `INDEX` variable will take a value from (`7...10`).
+   > In this example, `4` iterations will be done and the `INDEX` variable will take a value from (`7...10`).
    > ```javascript
    > For 7  10
    >    Print INDEX

@@ -459,7 +459,7 @@ Las expresiones evaluadas o de llamado `$( )` se usan para llamar cualquier Func
    > Para 10
    >    Imprimir INDEX
    > ```
-   > En este ejemplo, se harán `3` iteraciones y la variable `INDEX` tomará un valor desde (`7...10`).
+   > En este ejemplo, se harán `4` iteraciones y la variable `INDEX` tomará un valor desde (`7...10`).
    > ```javascript
    > Para 7  10
    >    Imprimir INDEX
