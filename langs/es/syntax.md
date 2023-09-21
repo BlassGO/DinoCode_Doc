@@ -780,6 +780,83 @@ Retornar es una acción especial usada principalmente en Funciones, permite que 
 >
 > ```
 
+## Propiedades
+> Las propiedades permiten definir comportamientos especiales para los Argumentos de una Función.
+> 
+> **->** No se permiten espacios en blanco.
+>
+> ```javascript
+> :TAG -> TAG = [propiedad=VALOR, propiedad2=VALOR, propiedad3=VALOR]
+> ```
+
+> Propiedades Nativas:
+> 
+> | **Propiedad** |              **VALOR**              |                                                                                         **Explicación**                                                                                         |
+> |:-------------:|:-----------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+> |      max      |            Número entero            |                                                                             Establece el número máximo de Argumentos                                                                            |
+> |    literal    |   1 = Activado<br>0 = Por defecto   | Permite el uso de Argumentos literales, un argumento literal no requiere comillas/delimitador (similar a un número), PERO no puede contener espacios ni tener el mismo nombre de algún conector |
+> |     concat    | TAG o nombre de conector de destino | Indica que todos los Argumentos recibidos por el Conector en donde se definió "concat" deben agregarse a los del TAG o conector especificado (sin sobrescribir)                                 |
+
+> En este ejemplo, se define la propiedad `max` con `3` para la función `Sumar`, es decir, la función únicamente puede recibir 3 argumentos.
+> 
+> ```javascript
+> :SUMAR -> SUMAR = [max=3]
+>    Mensaje "Resultado" Con % SUMAR[1] + SUMAR[2] + SUMAR[3] %
+> 
+> :main
+>    Sumar 1 2 3
+>    Sumar 1 2 3 4  # Esto generaría un ERROR
+>
+> ```
+>
+> En este ejemplo, se define la propiedad `literal` con `1` para la función `ABC`, permitiendo el uso de Argumentos Literales.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1]
+>    Para CLAVE VALOR En ABC
+>       Imprimir VALOR
+> 
+> :main
+>    ABC Primero Segundo Tercero
+>
+> ```
+> 
+> En este ejemplo, se define la propiedad `concat` con `ABC` para el conector `WITH` de la función `ABC`. De esta forma, cualquier Argumento de `WITH` será apilado en los argumentos de `ABC`.
+> 
+> ```javascript
+> :ABC -> WITH = [concat=ABC]
+>    Para CLAVE VALOR En ABC
+>       Imprimir VALOR
+> 
+> :main
+>    ABC 1 2 WITH 3
+>
+> ```
+> 
+> Tanto la función principal como sus conectores tienen propiedades individuales.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1], WITH = [concat=ABC]
+>    Para CLAVE VALOR En ABC
+>       Imprimir VALOR
+> 
+> :main
+>    ABC Primero Segundo WITH "Tercero"
+>
+> ```
+> 
+> Es posible mezclar propiedades con Apodos.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1], WITH = [к, と, concat=ABC]
+>    Para CLAVE VALOR En ABC
+>       Imprimir VALOR
+> 
+> :main
+>    ABC Primero Segundo と "Tercero"
+>
+> ```
+
 ## Delimitador
 > Por defecto, las comillas dobles `" "` agrupan los parámetros que deben tomarse como texto literal (por lo que si desea agregar una comilla doble literal dentro de un grupo de comillas dobles, debe [Escaparla](#escape)).
 ```javascript
@@ -867,7 +944,7 @@ Mensaje "T í t u l o" Con "Huh!"
 ## Interfaz gráfica
 > Permite aprovechar la capacidad de AHK de crear interfaces gráficas de usuario (GUI).
 >
-> **->** Nativamente solo se soporta la función `Gui`, etiquetas o funciones especiales existentes para el control de GUI en AHK, podrían no estar disponibles.
+> **->** Nativamente solo se soportan las funciones `Gui`, `GuiControl` y `GuiControlGet`, etiquetas o funciones especiales existentes para el control de GUI en AHK, podrían no estar disponibles.
 
 
 > **->** A continuación, se muestran algunos ejemplos básicos, para mayor información [PRESIONE AQUÍ](https://www.autohotkey.com/docs/v1/lib/Gui.htm ':ignore').
@@ -899,6 +976,15 @@ Mensaje "T í t u l o" Con "Huh!"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui2.jpg"></p>
+>
+> También se soportan las funciones [GuiControl](https://www.autohotkey.com/docs/v1/lib/GuiControl.htm ':ignore') y [GuiControlGet](https://www.autohotkey.com/docs/v1/lib/GuiControlGet.htm ':ignore').
+> 
+> ```javascript
+>    GuiControl "MyGUI:, CONTENIDO, Something"
+>    GuiControlGet "InfoVar, MyGUI:Pos, CONTENIDO"
+>    Mensaje con InfoVarX
+>    Mensaje con InfoVarW
+> ```
 
 
 

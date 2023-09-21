@@ -780,6 +780,83 @@ Return is a special action used mainly in Functions, it allows a Section to retu
 >
 > ```
 
+## Properties
+> Properties allow to define special behaviors for the Arguments of a Function.
+> 
+> **->** No blank spaces allowed.
+>
+> ```javascript
+> :TAG -> TAG = [property=VALUE, property2=VALUE, property3=VALUE]
+> ```
+
+> Native Properties:
+> 
+> | **Property** |              **VALUE**              |                                                                                         **Explanation**                                                                                         |
+> |:-------------:|:-----------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+> |      max      |            Integer            |                                                                             Sets the maximum number of Arguments                                                                            |
+> |    literal    |   1 = Activated<br>0 = By Default   | Allows the use of Literal Arguments, a literal argument does not require quotes/delimiter (similar to a number), BUT cannot contain spaces or have the same name as any connector |
+> |     concat    | TAG or connector name | Indicates that all Arguments received by the Connector where "concat" was defined must be added to those of the specified TAG or connector (without overwriting)                                 |
+
+> In this example, the `max` property is defined with `3` for the `Add` function, that is, the function can only receive 3 arguments.
+> 
+> ```javascript
+> :ADD -> ADD = [max=3]
+>    Msg "Result" With % ADD[1] + ADD[2] + ADD[3] %
+> 
+> :main
+>    Add 1 2 3
+>    Add 1 2 3 4  # This would generate an ERROR
+>
+> ```
+>
+> In this example, the property `literal` is defined with `1` for the function `ABC`, allowing the use of Literal Arguments.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1]
+>    For KEY VALUE In ABC
+>       Print VALUE
+> 
+> :main
+>    ABC First Second Third
+>
+> ```
+> 
+> This example defines the `concat` property with `ABC` for the `WITH` connector of the `ABC` function. This way, any arguments of `WITH` will be stacked on the arguments of `ABC`.
+> 
+> ```javascript
+> :ABC -> WITH = [concat=ABC]
+>    For KEY VALUE In ABC
+>       Print VALUE
+> 
+> :main
+>    ABC 1 2 WITH 3
+>
+> ```
+> 
+> Both the main function and its connectors have individual properties.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1], WITH = [concat=ABC]
+>    For KEY VALUE In ABC
+>       Print VALUE
+> 
+> :main
+>    ABC First Second WITH "Third"
+>
+> ```
+> 
+> It is possible to mix properties with Nicknames.
+> 
+> ```javascript
+> :ABC -> ABC = [literal=1], WITH = [к, と, concat=ABC]
+>    For KEY VALUE In ABC
+>       Print VALUE
+> 
+> :main
+>    ABC First Second と "Third"
+>
+> ```
+
 ## Delimiter
 > By default, double quotes `" "` group parameters that should be taken as literal text (so if you want to add a literal double quote inside a group of double quotes, you must [Escape it](#escape)).
 ```javascript
@@ -867,7 +944,7 @@ Message "T i t l e" With "Huh!"
 ## Graphic interface
 > Allows you to take advantage of AHK's ability to create graphical user interfaces (GUIs).
 >
-> **->** Natively only `Gui` function is supported, existing tags or special functions for GUI control in AHK may not be available.
+> **->** Natively only the `Gui`, `GuiControl` and `GuiControlGet` functions are supported, existing special tags or functions for GUI control in AHK may not be available.
 
 
 > **->** Some basic examples are shown below, for more information [CLICK HERE](https://www.autohotkey.com/docs/v1/lib/Gui.htm ':ignore').
@@ -899,6 +976,15 @@ Message "T i t l e" With "Huh!"
 >
 > ```
 > <p align="center"> <img width="300" height="183" src="https://raw.githubusercontent.com/BlassGO/DinoCode_Doc/main/images/gui2_en.jpg"></p>
+>
+> Functions [GuiControl](https://www.autohotkey.com/docs/v1/lib/GuiControl.htm ':ignore') and [GuiControlGet](https://www.autohotkey.com/docs/v1/lib/GuiControlGet.htm ':ignore') are also supported.
+> 
+> ```javascript
+>    GuiControl "MyGUI:, CONTENT, Something"
+>    GuiControlGet "InfoVar, MyGUI:Pos, CONTENT"
+>    Msg With InfoVarX
+>    Msg With InfoVarW
+> ```
 
 
 ## Modulation
