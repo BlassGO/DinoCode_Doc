@@ -881,6 +881,36 @@ Mensaje "T í t u l o" Con "Huh!"
     > ```
     > **ADVERTENCIA**: Existe una diferencia entre usar un carácter escapado alfabético en Minúsculas y uno en Mayúsculas. En distros Linux se suele usar el carácter `\n` conocido como "linefeed" para representar un salto de línea, sin embargo, en sistemas operativos Windows, se prefiere una combinación de "retorno de carro"-->`\r`, junto a "linefeed"-->`\n`. Por comodidad en DinoCode el uso de `\n` NO representa realmente un "linefeed", sino la combinación `\r\n`. Para usar un "linefeed" real, se puede persistir cambiando el carácter a Mayúscula, es decir, `\N`.
 
+## Redireccionar
+> Permite capturar contenido multi-linea en una `Variable`.
+>
+> **->** Se capturará cualquier línea que esté después de la redirección `>` y tenga un indentado (margen izuierdo) superior al mismo. Además, no se considerará el primer espacio en blanco a partir del margen del redireccionador `>`, por lo que el contenido capturado será muy exacto incluso si está dentro de una condición u otro tipo de bloque.
+> ```javascript
+> > VARIABLE
+>    Primera linea
+>    Segunda linea
+> ```
+
+> Es posible usar [Expresiones](#expresiones) porcentuales para construir contenido más complejo. Además, el delimitador (comillas dobles) no es un problema.
+> ```javascript
+>   Definir TEST = "n u e v o"
+>   > MI_VARIABLE
+>     Primera "linea"
+>     Segunda linea
+>     %TEST%
+>     Tercera linea
+>   Mensaje "CONTENIDO" con MI_VARIABLE
+> ```
+> 
+> También se soporta el [Escape](#escape) de carácteres.
+> ```javascript
+>   > MI_VARIABLE
+>     Primera linea
+>     Segunda linea\n\n
+>     Tercera linea
+>   Mensaje "CONTENIDO" con MI_VARIABLE
+> ```
+
 ## Hilos
 > Permite ejecutar Secciones `TAG` asincronicamente, es decir, la sección usará un espacio de ejecución independiente.
 > 

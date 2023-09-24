@@ -881,6 +881,36 @@ Message "T i t l e" With "Huh!"
     > ```
     > **WARNING**: There is a difference between using a Lowercase and an Uppercase alphabetic escaped character. On Linux distros, the `\n` character known as "linefeed" is often used to represent a newline, however, on Windows operating systems, a combination of "carriage return"-->`\r`, next to "linefeed"-->`\n` is more appreciated. For convenience in DinoCode the use of `\n` does NOT actually represent a "linefeed", but the combination `\r\n`. To use a real linefeed, it can be persisted by changing the character to Upper Case, ie `\N`.
 
+## Redirect
+> Allows capturing multi-line content in a `Variable`.
+>
+> **->** Any line that is after the `>` redirect and has an indentation (left margin) greater than it will be captured. Additionally, the first white space from the margin of the `>` redirector will not be considered, so the captured content will be very accurate even if it is inside a condition or other type of block.
+> ```javascript
+> > VARIABLE
+>    First line
+>    Second line
+> ```
+
+> It is possible to use percentage [Expressions](#expressions) to build more complex content. Also, the delimiter (double quotes) is not a problem.
+> ```javascript
+>   Set TEST = "n u e v o"
+>   > MY_VAR
+>     First "line"
+>     Second line
+>     %TEST%
+>     Third line
+>   Msg "CONTENT" With MY_VAR
+> ```
+> 
+> Character [Escape](#escape) is also supported.
+> ```javascript
+>   > MY_VAR
+>     First line
+>     Second line\n\n
+>     Third line
+>   Msg "CONTENT" With MY_VAR
+> ```
+
 ## Threads
 > It allows executing `TAG` Sections asynchronously, that is, the section will use a separate execution space.
 > 
